@@ -5,22 +5,45 @@ type AffiliateLink = {
 };
 
 const DEFAULT_LINKS: AffiliateLink[] = [
+  // SaaS / tools (high intent, good payouts once you have referral links)
   {
-    label: "Cloudflare Workers AI",
-    href: "https://developers.cloudflare.com/workers-ai/",
-    description: "Docs and model catalog",
+    label: "Notion (notes & docs)",
+    href: "https://www.notion.so/",
+    description: "Organize notes, tasks, and docs",
   },
   {
-    label: "Next.js",
-    href: "https://nextjs.org/",
-    description: "Framework used by this site",
+    label: "Canva (design)",
+    href: "https://www.canva.com/",
+    description: "Make designs fast (posts, resumes, logos)",
+  },
+  {
+    label: "Hostinger (web hosting)",
+    href: "https://www.hostinger.com/",
+    description: "Affordable hosting (swap with your referral link)",
+  },
+  {
+    label: "NordVPN (VPN)",
+    href: "https://nordvpn.com/",
+    description: "Popular VPN (swap with your referral link)",
+  },
+
+  // Amazon placeholders (replace with your Associate links)
+  {
+    label: "Amazon: Laptops",
+    href: "https://www.amazon.in/",
+    description: "Replace with your Amazon Associate link",
+  },
+  {
+    label: "Amazon: Books",
+    href: "https://www.amazon.in/",
+    description: "Replace with your Amazon Associate link",
   },
 ];
 
 export default function AffiliateModule({ links = DEFAULT_LINKS }: { links?: AffiliateLink[] }) {
   const disclosure =
     process.env.NEXT_PUBLIC_AFFILIATE_DISCLOSURE ??
-    "Some links may be affiliate links. If you buy through them, we may earn a commission at no extra cost to you.";
+    "Disclosure: Some links are affiliate links. If you purchase through them, we may earn a commission at no extra cost to you.";
 
   return (
     <section className="space-y-2">

@@ -1,6 +1,14 @@
 # QuickQuery AI
 
-A minimal Q&A website powered by **Cloudflare Workers AI**.
+A minimal Q&A website powered by **Cloudflare Workers AI** (Next.js on Cloudflare Pages via `@cloudflare/next-on-pages`).
+
+## Features
+
+- Short answers by default (1 sentence + up to 3 bullets)
+- Optional web search citations (server-side, requires API key)
+- Basic SEO routes: `/robots.txt` + `/sitemap.xml`
+- Static pages: `/about` `/contact` `/privacy` `/terms`
+- Monetization placeholders (AdSense slot + affiliate module)
 
 ## Local dev
 
@@ -22,20 +30,45 @@ Note: Cloudflare Workers AI bindings are not available in plain `next dev`.
    - Build command: `npm run build && npx @cloudflare/next-on-pages`
    - Build output: `.vercel/output/static`
 
-4. Configure binding:
-   - Settings → Functions → Bindings → **AI** (Workers AI) with binding name: `AI`
+4. Configure bindings / env vars
+
+### Required
+
+- **Workers AI binding** (Settings → Functions → Bindings):
+  - Type: Workers AI
+  - Binding name: `AI`
+
+### Optional (web citations)
+
+- `BRAVE_SEARCH_API_KEY` (server-side env var)
+  - If set, the UI checkbox “Use web citations” will fetch top results from Brave Search.
+  - If not set, the app still works, just without citations.
+
+### Optional (SEO)
+
+- `NEXT_PUBLIC_SITE_URL` (e.g. `https://quickquery.example.com`)
+  - Used for canonical URLs + sitemap.
+
+### Optional (monetization placeholders)
+
+- `NEXT_PUBLIC_ADSENSE_CLIENT_ID` (e.g. `ca-pub-xxxxxxxxxxxxxxx`)
+- `NEXT_PUBLIC_ADSENSE_SLOT_1` (slot id)
+- `NEXT_PUBLIC_AFFILIATE_DISCLOSURE` (override disclosure text)
+- `NEXT_PUBLIC_CONTACT_EMAIL`
 
 5. Deploy.
 
 ## API
 
-- `POST /api/ask` with JSON: `{ "q": "..." }`
+- `POST /api/ask` with JSON: `{ "q": "...", "useWeb": true }`
 
 Returns:
 ```json
-{ "answer": "..." }
+{ "answer": "...", "citations": [{"title":"...","url":"..."}] }
 ```
 
-## Notes
+## Notes / next steps
 
-- This is an MVP. Add rate limiting + caching before sharing broadly.
+- Add rate limiting + abuse prevention.
+- Add caching for repeated queries.
+- Consider a dedicated search worker if you want richer citation extraction.

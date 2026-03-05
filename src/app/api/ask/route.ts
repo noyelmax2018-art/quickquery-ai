@@ -2,11 +2,49 @@ import { getRequestContext } from "@cloudflare/next-on-pages";
 
 export const runtime = "edge";
 
+type WebCitation = { title: string; url: string };
+
+async function braveSearch(opts: { q: string; apiKey: string }): Promise<WebCitation[]> {
+  const url = new URL("https://api.search.brave.com/res/v1/web/search");
+  url.searchParams.set("q", opts.q);
+  url.searchParams.set("count", "3");
+
+  const res = await fetch(url.toString(), {
+    headers: {
+      Accept: "application/json",
+      "Accept-Encoding": "gzip",
+      "X-Subscription-Token": opts.apiKey,
+    },
+  });
+
+  if (!res.ok) {
+    // Don’t fail the entire request when search is down/misconfigured.
+    return [];
+  }
+
+  type BraveWebResult = { title?: unknown; url?: unknown };
+  type BraveResponse = { web?: { results?: BraveWebResult[] } };
+
+  const data = (await res.json().catch(() => null)) as BraveResponse | null;
+  const items = data?.web?.results ?? [];
+
+  return items
+    .map((r) => ({
+      title: typeof r.title === "string" ? r.title : "",
+      url: typeof r.url === "string" ? r.url : "",
+    }))
+    .filter((x) => x.url);
+}
+
 export async function POST(req: Request) {
   const { env } = getRequestContext();
 
-  const body = (await req.json().catch(() => null)) as null | { q?: string };
+  const body = (await req.json().catch(() => null)) as
+    | null
+    | { q?: string; useWeb?: boolean };
+
   const q = body?.q?.toString().trim() ?? "";
+  const useWeb = Boolean(body?.useWeb);
 
   if (q.length < 3) {
     return Response.json({ error: "Question too short" }, { status: 400 });
@@ -14,7 +52,13 @@ export async function POST(req: Request) {
 
   // Cloudflare Workers AI binding (recommended): bind as `AI` in Cloudflare.
   // https://developers.cloudflare.com/workers-ai/
-  const ai = (env as { AI?: { run: (model: string, input: Record<string, unknown>) => Promise<unknown> } }).AI;
+  const ai = (
+    env as {
+      AI?: { run: (model: string, input: Record<string, unknown>) => Promise<unknown> };
+      BRAVE_SEARCH_API_KEY?: string;
+    }
+  ).AI;
+
   if (!ai) {
     return Response.json(
       {
@@ -25,18 +69,37 @@ export async function POST(req: Request) {
     );
   }
 
-  const prompt = [
+  const braveKey = (env as { BRAVE_SEARCH_API_KEY?: string }).BRAVE_SEARCH_API_KEY;
+  let citations: WebCitation[] = [];
+
+  if (useWeb && braveKey) {
+    citations = await braveSearch({ q, apiKey: braveKey });
+  }
+
+  const system = [
     "You are QuickQuery AI.",
-    "Give a direct answer first.",
-    "- If it's a simple question (math, definition): answer in 1 line.",
-    "- Otherwise: use at most 3 short bullets.",
-    "- No long explanations unless the user asks.",
-    "Question: " + q,
+    "Answer SHORT by default.",
+    "Rules:",
+    "- Start with the direct answer in 1 sentence.",
+    "- Then (optional) add up to 3 short bullets if needed.",
+    "- No long explanations unless asked.",
+    citations.length
+      ? "- When using sources, include citations like [1] [2] matching the provided source list."
+      : "- If you don't have sources, do not invent citations.",
   ].join("\n");
+
+  const sourcesBlock = citations.length
+    ? "\n\nSources (cite as [1], [2], ...):\n" +
+      citations
+        .map((c, i) => `${i + 1}. ${c.title || c.url} — ${c.url}`)
+        .join("\n")
+    : "";
+
+  const prompt = `${system}\n\nQuestion: ${q}${sourcesBlock}`;
 
   const result = await ai.run("@cf/meta/llama-3.1-8b-instruct", {
     prompt,
-    max_tokens: 220,
+    max_tokens: citations.length ? 220 : 160,
   });
 
   let text: string;
@@ -53,5 +116,5 @@ export async function POST(req: Request) {
     text = JSON.stringify(result);
   }
 
-  return Response.json({ answer: text });
+  return Response.json({ answer: text, citations: citations.length ? citations : undefined });
 }

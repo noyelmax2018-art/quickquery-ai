@@ -1,0 +1,8 @@
+name = "quickquery-ai"
+compatibility_date = "2026-03-05"
+
+# For Cloudflare Pages, bindings are configured in the dashboard.
+# For local dev with wrangler, you can bind Workers AI like this:
+#
+# [ai]
+# binding = "AI"

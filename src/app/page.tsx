@@ -1,4 +1,6 @@
 import AskBox from "@/components/AskBox";
+import Monetization from "@/components/Monetization";
+import SiteFooter from "@/components/SiteFooter";
 
 export default function Home() {
   return (
@@ -6,16 +8,17 @@ export default function Home() {
       <div className="mx-auto max-w-3xl space-y-6">
         <header className="space-y-2">
           <h1 className="text-3xl font-semibold tracking-tight">QuickQuery AI</h1>
-          <p className="text-sm text-neutral-300">
-            Ask a question. Get a fast, sourced answer.
+          <p className="text-sm text-neutral-300">Ask a question. Get a fast answer.</p>
+          <p className="text-xs text-neutral-500">
+            Optional web citations are available when enabled and configured.
           </p>
         </header>
 
         <AskBox />
 
-        <footer className="pt-6 text-xs text-neutral-400">
-          AI answers can be wrong. Verify important info.
-        </footer>
+        <Monetization />
+
+        <SiteFooter />
       </div>
     </main>
   );

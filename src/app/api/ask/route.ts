@@ -25,11 +25,18 @@ export async function POST(req: Request) {
     );
   }
 
-  const prompt = `Answer the user's question concisely in 5-8 bullet points.\n\nQuestion: ${q}`;
+  const prompt = [
+    "You are QuickQuery AI.",
+    "Give a direct answer first.",
+    "- If it's a simple question (math, definition): answer in 1 line.",
+    "- Otherwise: use at most 3 short bullets.",
+    "- No long explanations unless the user asks.",
+    "Question: " + q,
+  ].join("\n");
 
   const result = await ai.run("@cf/meta/llama-3.1-8b-instruct", {
     prompt,
-    max_tokens: 500,
+    max_tokens: 220,
   });
 
   let text: string;

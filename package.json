@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "preview:cf": "npx @cloudflare/next-on-pages",
-    "deploy:cf": "npx @cloudflare/next-on-pages --experimental-minify"
+    "pages:build": "next-on-pages",
+    "preview:cf": "next-on-pages",
+    "deploy:cf": "next-on-pages --experimental-minify"
   },
   "dependencies": {
     "@cloudflare/ai": "^1.2.2",

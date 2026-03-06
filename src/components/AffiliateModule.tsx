@@ -18,8 +18,8 @@ const DEFAULT_LINKS: AffiliateLink[] = [
   },
   {
     label: "Hostinger (web hosting)",
-    href: "https://www.hostinger.com/",
-    description: "Affordable hosting (swap with your referral link)",
+    href: "https://www.hostinger.com/?REFERRALCODE=K2VNOYELMITC",
+    description: "Affordable hosting",
   },
   {
     label: "NordVPN (VPN)",

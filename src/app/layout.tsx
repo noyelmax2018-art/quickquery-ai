@@ -28,8 +28,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const googleSiteVerification =
+    process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ??
+    "mRVVOITmtxMev-nCATEMULyHrI-lZikDVUbORGEk4gY";
+
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="google-site-verification"
+          content={googleSiteVerification}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

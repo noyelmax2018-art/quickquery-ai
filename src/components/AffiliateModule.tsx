@@ -7,11 +7,6 @@ type AffiliateLink = {
 const DEFAULT_LINKS: AffiliateLink[] = [
   // SaaS / tools (high intent, good payouts once you have referral links)
   {
-    label: "Notion (notes & docs)",
-    href: "https://www.notion.so/",
-    description: "Organize notes, tasks, and docs",
-  },
-  {
     label: "Hostinger (web hosting)",
     href: "https://www.hostinger.com/?REFERRALCODE=K2VNOYELMITC",
     description: "Affordable hosting",

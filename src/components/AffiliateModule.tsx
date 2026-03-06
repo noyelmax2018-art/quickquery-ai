@@ -12,21 +12,10 @@ const DEFAULT_LINKS: AffiliateLink[] = [
     description: "Organize notes, tasks, and docs",
   },
   {
-    label: "Canva (design)",
-    href: "https://www.canva.com/",
-    description: "Make designs fast (posts, resumes, logos)",
-  },
-  {
     label: "Hostinger (web hosting)",
     href: "https://www.hostinger.com/?REFERRALCODE=K2VNOYELMITC",
     description: "Affordable hosting",
   },
-  {
-    label: "NordVPN (VPN)",
-    href: "https://nordvpn.com/",
-    description: "Popular VPN (swap with your referral link)",
-  },
-
   // Amazon (use your Associate tracking id)
   {
     label: "Amazon: Laptops",

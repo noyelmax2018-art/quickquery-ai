@@ -1,0 +1,323 @@
+export type SeoTopic = {
+  slug: string;
+  title: string;
+  description: string;
+  keywords: string[];
+};
+
+// Global, high-intent topics around hosting & websites.
+// Note: Keep slugs stable (used in sitemap + internal links).
+export const SEO_TOPICS: SeoTopic[] = [
+  {
+    slug: "best-web-hosting-for-beginners",
+    title: "Best Web Hosting for Beginners (2026)",
+    description: "How to choose beginner-friendly hosting: pricing, speed, support, and 1-click WordPress.",
+    keywords: ["best web hosting", "beginner hosting", "cheap hosting"],
+  },
+  {
+    slug: "how-to-start-a-website",
+    title: "How to Start a Website (Step-by-Step)",
+    description: "A simple checklist: domain, hosting, WordPress, theme, pages, and launch.",
+    keywords: ["start a website", "create website", "website checklist"],
+  },
+  {
+    slug: "how-to-buy-a-domain-name",
+    title: "How to Buy a Domain Name (And What to Avoid)",
+    description: "Learn how to pick a domain, compare extensions, and avoid common upsells.",
+    keywords: ["buy domain", "domain name", "domain extensions"],
+  },
+  {
+    slug: "domain-vs-hosting",
+    title: "Domain vs Hosting: What’s the Difference?",
+    description: "A clear explanation of domain names, web hosting, DNS, and how they work together.",
+    keywords: ["domain vs hosting", "what is hosting", "what is a domain"],
+  },
+  {
+    slug: "wordpress-vs-website-builder",
+    title: "WordPress vs Website Builders: Which Should You Use?",
+    description: "Compare WordPress vs builders for control, cost, SEO, and long-term flexibility.",
+    keywords: ["wordpress vs wix", "website builder", "wordpress"],
+  },
+  {
+    slug: "shared-vs-vps-hosting",
+    title: "Shared vs VPS Hosting: Which Is Right for You?",
+    description: "When shared hosting is enough and when to upgrade to VPS.",
+    keywords: ["shared hosting", "vps hosting", "upgrade hosting"],
+  },
+  {
+    slug: "best-hosting-for-wordpress",
+    title: "Best Hosting for WordPress (Speed + Ease)",
+    description: "What to look for in WordPress hosting: caching, PHP, backups, staging.",
+    keywords: ["wordpress hosting", "fast wordpress", "managed hosting"],
+  },
+  {
+    slug: "how-to-make-a-portfolio-website",
+    title: "How to Make a Portfolio Website (Fast)",
+    description: "A simple structure for designers/devs: homepage, work, about, contact.",
+    keywords: ["portfolio website", "personal website", "online portfolio"],
+  },
+  {
+    slug: "how-to-make-a-business-website",
+    title: "How to Make a Small Business Website",
+    description: "Pages you need, trust signals, contact forms, and local SEO basics.",
+    keywords: ["business website", "small business site", "local seo"],
+  },
+  {
+    slug: "website-seo-basics",
+    title: "Website SEO Basics (Beginner Guide)",
+    description: "Simple SEO: keywords, titles, internal links, speed, and sitemaps.",
+    keywords: ["seo basics", "on page seo", "sitemap"],
+  },
+  {
+    slug: "how-to-speed-up-a-website",
+    title: "How to Speed Up a Website (Checklist)",
+    description: "Core steps: image optimization, caching, CDN, lazy loading.",
+    keywords: ["speed up website", "website performance", "cdn"],
+  },
+  {
+    slug: "ssl-certificate-what-it-is",
+    title: "What Is an SSL Certificate? (HTTPS Explained)",
+    description: "Why HTTPS matters and how SSL works.",
+    keywords: ["ssl certificate", "https", "website security"],
+  },
+  {
+    slug: "how-to-install-wordpress",
+    title: "How to Install WordPress (Beginner-Friendly)",
+    description: "1-click install vs manual install, plus what to do after installing.",
+    keywords: ["install wordpress", "wordpress setup", "wordpress hosting"],
+  },
+  {
+    slug: "best-wordpress-plugins",
+    title: "Best WordPress Plugins (Essential List)",
+    description: "Security, SEO, caching, forms, backups: what you actually need.",
+    keywords: ["best wordpress plugins", "wordpress seo", "wordpress cache"],
+  },
+  {
+    slug: "how-to-make-a-blog",
+    title: "How to Make a Blog (And Get Readers)",
+    description: "Pick a niche, set up WordPress, publish, and promote.",
+    keywords: ["start a blog", "make a blog", "blogging"],
+  },
+  {
+    slug: "how-to-start-an-online-store",
+    title: "How to Start an Online Store (Beginner Guide)",
+    description: "Shopify vs WooCommerce, hosting requirements, and launch checklist.",
+    keywords: ["start online store", "woocommerce", "shopify"],
+  },
+  {
+    slug: "woocommerce-vs-shopify",
+    title: "WooCommerce vs Shopify: Which Is Better?",
+    description: "Compare costs, control, apps/plugins, and scalability.",
+    keywords: ["woocommerce vs shopify", "ecommerce", "online store"],
+  },
+  {
+    slug: "best-domain-extensions",
+    title: "Best Domain Extensions (.com vs .net vs .org)",
+    description: "How to choose an extension for branding and trust.",
+    keywords: ["domain extensions", ".com", "choose domain"],
+  },
+  {
+    slug: "how-to-choose-a-domain-name",
+    title: "How to Choose a Domain Name (Brand + SEO)",
+    description: "Simple rules for a memorable domain.",
+    keywords: ["choose domain name", "domain tips", "brand name"],
+  },
+  {
+    slug: "best-website-builder",
+    title: "Best Website Builder (Quick Comparison)",
+    description: "A quick comparison of popular builders and who each is for.",
+    keywords: ["best website builder", "wix", "squarespace"],
+  },
+  {
+    slug: "how-to-migrate-a-website",
+    title: "How to Migrate a Website to a New Host",
+    description: "A safe migration checklist to avoid downtime.",
+    keywords: ["website migration", "move host", "site transfer"],
+  },
+  {
+    slug: "dns-explained",
+    title: "DNS Explained (In Simple Terms)",
+    description: "What DNS does, common record types, and how changes propagate.",
+    keywords: ["dns", "a record", "cname"],
+  },
+  {
+    slug: "what-is-cdn",
+    title: "What Is a CDN? (And Do You Need One)",
+    description: "How CDNs speed up websites and reduce server load.",
+    keywords: ["cdn", "cloudflare", "website speed"],
+  },
+  {
+    slug: "best-cheap-hosting",
+    title: "Best Cheap Hosting (What to Look For)",
+    description: "How to avoid the most common cheap-hosting traps.",
+    keywords: ["cheap hosting", "budget hosting", "best hosting"],
+  },
+  {
+    slug: "hosting-for-landing-pages",
+    title: "Best Hosting for Landing Pages",
+    description: "Simple hosting options for fast landing pages.",
+    keywords: ["landing page hosting", "fast hosting", "static site"],
+  },
+  {
+    slug: "email-for-business",
+    title: "How to Set Up Business Email (Guide)",
+    description: "What business email is and how to set it up.",
+    keywords: ["business email", "custom email", "email domain"],
+  },
+  {
+    slug: "website-legal-pages",
+    title: "Website Legal Pages You Need (Privacy/Terms)",
+    description: "A simple overview of privacy policies, terms, and disclaimers.",
+    keywords: ["privacy policy", "terms", "legal pages"],
+  },
+  {
+    slug: "how-to-get-website-traffic",
+    title: "How to Get Website Traffic (Beginner Plan)",
+    description: "SEO + social: what to do first to get visitors.",
+    keywords: ["get traffic", "seo", "promote website"],
+  },
+  {
+    slug: "keyword-research-basics",
+    title: "Keyword Research Basics (For Small Sites)",
+    description: "How to find low-competition keywords and build content around them.",
+    keywords: ["keyword research", "seo keywords", "long tail"],
+  },
+  {
+    slug: "internal-linking",
+    title: "Internal Linking: Simple SEO Wins",
+    description: "How internal links help ranking and user experience.",
+    keywords: ["internal linking", "seo", "site structure"],
+  },
+  {
+    slug: "site-structure-seo",
+    title: "Site Structure for SEO (Simple Blueprint)",
+    description: "How to organize your pages and categories for growth.",
+    keywords: ["site structure", "seo", "information architecture"],
+  },
+  {
+    slug: "google-search-console",
+    title: "How to Set Up Google Search Console",
+    description: "Submit sitemap, monitor indexing, and fix coverage issues.",
+    keywords: ["google search console", "submit sitemap", "indexing"],
+  },
+  {
+    slug: "google-analytics-alternatives",
+    title: "Analytics for Your Website (Simple Options)",
+    description: "What to track and simple analytics options.",
+    keywords: ["website analytics", "plausible", "posthog"],
+  },
+  {
+    slug: "how-to-monetize-a-website",
+    title: "How to Monetize a Website (Beginner Options)",
+    description: "Affiliate, ads, services, and digital products: what works.",
+    keywords: ["monetize website", "affiliate", "ads"],
+  },
+  {
+    slug: "affiliate-marketing-basics",
+    title: "Affiliate Marketing Basics (For Website Owners)",
+    description: "How affiliate links work and how to stay compliant.",
+    keywords: ["affiliate marketing", "amazon associates", "disclosure"],
+  },
+  {
+    slug: "adsense-requirements",
+    title: "Google AdSense Requirements (Checklist)",
+    description: "What you need before applying and common rejection reasons.",
+    keywords: ["adsense", "adsense approval", "website policies"],
+  },
+  {
+    slug: "best-laptops-for-students",
+    title: "Best Laptops for Students (Buying Guide)",
+    description: "What to look for in a student laptop: battery, weight, and value.",
+    keywords: ["best student laptop", "buy laptop", "laptop guide"],
+  },
+  {
+    slug: "best-productivity-books",
+    title: "Best Productivity Books (Quick Picks)",
+    description: "A quick list of books that improve focus, habits, and output.",
+    keywords: ["productivity books", "best books", "focus"],
+  },
+  {
+    slug: "how-to-write-good-about-page",
+    title: "How to Write a Good About Page",
+    description: "A simple template to build trust.",
+    keywords: ["about page", "website copy", "trust"],
+  },
+  {
+    slug: "contact-page-best-practices",
+    title: "Contact Page Best Practices",
+    description: "What to include so visitors can reach you.",
+    keywords: ["contact page", "website contact", "support"],
+  },
+  {
+    slug: "how-to-make-a-landing-page",
+    title: "How to Make a Landing Page That Converts",
+    description: "Structure, headline, proof, CTA, and speed.",
+    keywords: ["landing page", "conversion", "cta"],
+  },
+  {
+    slug: "best-free-website-tools",
+    title: "Best Free Website Tools (Starter Stack)",
+    description: "A starter toolkit for building and growing.",
+    keywords: ["website tools", "free tools", "starter stack"],
+  },
+  {
+    slug: "how-to-setup-cloudflare",
+    title: "How to Set Up Cloudflare (Beginner Guide)",
+    description: "DNS, caching, SSL, and basic security settings.",
+    keywords: ["cloudflare", "dns", "ssl"],
+  },
+  {
+    slug: "website-security-basics",
+    title: "Website Security Basics",
+    description: "Updates, backups, strong passwords, and basic hardening.",
+    keywords: ["website security", "backups", "wordpress security"],
+  },
+  {
+    slug: "how-to-add-privacy-policy",
+    title: "How to Add a Privacy Policy to Your Website",
+    description: "Where to place it and what it should cover.",
+    keywords: ["privacy policy", "website privacy", "gdpr"],
+  },
+  {
+    slug: "best-hosting-for-small-business",
+    title: "Best Hosting for Small Business",
+    description: "What small businesses need from hosting: uptime, support, email.",
+    keywords: ["small business hosting", "business website", "hosting"],
+  },
+  {
+    slug: "how-to-create-a-sitemap",
+    title: "How to Create a Sitemap (And Submit It)",
+    description: "Sitemaps for SEO and how to submit to search engines.",
+    keywords: ["sitemap", "submit sitemap", "seo"],
+  },
+  {
+    slug: "best-website-ideas",
+    title: "Best Website Ideas to Start (Beginner List)",
+    description: "Website ideas that can earn: affiliate, services, and content.",
+    keywords: ["website ideas", "start a website", "make money"],
+  },
+  {
+    slug: "how-to-add-affiliate-links",
+    title: "How to Add Affiliate Links (Without Getting Banned)",
+    description: "Disclosure, link attributes, and best practices.",
+    keywords: ["affiliate links", "disclosure", "sponsored"],
+  },
+  {
+    slug: "best-cheap-domains",
+    title: "Best Places to Buy Cheap Domains",
+    description: "How to compare registrars and avoid renewal surprises.",
+    keywords: ["cheap domains", "domain registrar", "buy domain"],
+  },
+  {
+    slug: "website-maintenance-checklist",
+    title: "Website Maintenance Checklist (Monthly)",
+    description: "Updates, backups, analytics checks, and performance.",
+    keywords: ["website maintenance", "updates", "backups"],
+  },
+  {
+    slug: "how-to-choose-a-host",
+    title: "How to Choose a Web Host (Simple Checklist)",
+    description: "Uptime, support, backups, and performance.",
+    keywords: ["choose web host", "hosting checklist", "best host"],
+  },
+];

@@ -13,14 +13,9 @@ const DEFAULT_LINKS: AffiliateLink[] = [
   },
   // Amazon (use your Associate tracking id)
   {
-    label: "Amazon: Laptops",
-    href: "https://www.amazon.com/s?k=laptop&tag=ai0c23-20",
-    description: "Shop laptops on Amazon",
-  },
-  {
-    label: "Amazon: Books",
-    href: "https://www.amazon.com/s?k=books&tag=ai0c23-20",
-    description: "Shop books on Amazon",
+    label: "Amazon.com",
+    href: "https://www.amazon.com/?tag=ai0c23-20",
+    description: "Shop on Amazon",
   },
 ];
 

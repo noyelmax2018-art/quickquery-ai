@@ -5,7 +5,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@example.com";
+  const email =
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL ??
+    "Jarvis.funstudio@gmail.com";
 
   return (
     <main className="min-h-screen bg-neutral-950 p-6 text-neutral-100 md:p-10">

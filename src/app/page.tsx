@@ -1,5 +1,6 @@
 import AskBox from "@/components/AskBox";
 import Monetization from "@/components/Monetization";
+import TopGuides from "@/components/TopGuides";
 import SiteFooter from "@/components/SiteFooter";
 
 export default function Home() {
@@ -15,6 +16,8 @@ export default function Home() {
         </header>
 
         <AskBox />
+
+        <TopGuides />
 
         <Monetization />
 

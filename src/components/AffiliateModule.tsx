@@ -27,16 +27,16 @@ const DEFAULT_LINKS: AffiliateLink[] = [
     description: "Popular VPN (swap with your referral link)",
   },
 
-  // Amazon placeholders (replace with your Associate links)
+  // Amazon (use your Associate tracking id)
   {
     label: "Amazon: Laptops",
-    href: "https://www.amazon.in/",
-    description: "Replace with your Amazon Associate link",
+    href: "https://www.amazon.com/s?k=laptop&tag=ai0c23-20",
+    description: "Shop laptops on Amazon",
   },
   {
     label: "Amazon: Books",
-    href: "https://www.amazon.in/",
-    description: "Replace with your Amazon Associate link",
+    href: "https://www.amazon.com/s?k=books&tag=ai0c23-20",
+    description: "Shop books on Amazon",
   },
 ];
 

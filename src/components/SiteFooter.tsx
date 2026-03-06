@@ -4,7 +4,7 @@ export default function SiteFooter() {
   return (
     <footer className="pt-8 text-xs text-neutral-500">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <span>© {new Date().getFullYear()} QuickQuery AI</span>
+        <span>© {new Date().getFullYear()} QuickQuery AI — owned by noyelmax</span>
         <Link className="underline underline-offset-4" href="/about">
           About
         </Link>

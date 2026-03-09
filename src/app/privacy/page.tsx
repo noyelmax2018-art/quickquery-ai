@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Shell from "@/components/Shell";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -6,12 +7,11 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-neutral-950 p-6 text-neutral-100 md:p-10">
-      <div className="mx-auto max-w-3xl space-y-4">
-        <h1 className="text-2xl font-semibold">Privacy Policy</h1>
+    <Shell title="Privacy Policy" subtitle="What we collect and how we use it">
+      <div className="space-y-6">
         <p className="text-sm text-neutral-300">
-          This is a lightweight, developer-friendly privacy policy template. Update it for your
-          specific product and jurisdiction.
+          This is a lightweight privacy policy template. Update it for your product and
+          jurisdiction.
         </p>
 
         <section className="space-y-2">
@@ -33,8 +33,7 @@ export default function PrivacyPage() {
         <section className="space-y-2">
           <h2 className="text-sm font-medium text-neutral-200">Web search (optional)</h2>
           <p className="text-sm text-neutral-300">
-            If you enable web citations, we may send your query to a third-party search API to fetch
-            public webpages. Configure this feature via server-side environment variables.
+            If you enable web citations, we may send your query to a third-party search API.
           </p>
         </section>
 
@@ -42,12 +41,14 @@ export default function PrivacyPage() {
           <h2 className="text-sm font-medium text-neutral-200">Ads / affiliate links (optional)</h2>
           <p className="text-sm text-neutral-300">
             If enabled, ads and affiliate links may use cookies or tracking technologies provided by
-            their networks. Disclosures will appear near the placements.
+            their networks.
           </p>
         </section>
 
-        <p className="text-xs text-neutral-500">Last updated: {new Date().toISOString().slice(0, 10)}</p>
+        <p className="text-xs text-neutral-500">
+          Last updated: {new Date().toISOString().slice(0, 10)}
+        </p>
       </div>
-    </main>
+    </Shell>
   );
 }

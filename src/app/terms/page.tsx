@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Shell from "@/components/Shell";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -6,20 +7,12 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main className="min-h-screen bg-neutral-950 p-6 text-neutral-100 md:p-10">
-      <div className="mx-auto max-w-3xl space-y-4">
-        <h1 className="text-2xl font-semibold">Terms of Service</h1>
+    <Shell title="Terms of Service" subtitle="Read before using the site">
+      <div className="space-y-6">
         <p className="text-sm text-neutral-300">
-          This is a minimal terms template. You should adapt it to your needs.
+          The service is provided “as is”. AI answers may be incorrect or incomplete. You are
+          responsible for verifying information before acting on it.
         </p>
-
-        <section className="space-y-2">
-          <h2 className="text-sm font-medium text-neutral-200">No warranties</h2>
-          <p className="text-sm text-neutral-300">
-            The service is provided “as is”. AI answers may be incorrect or incomplete. You are
-            responsible for verifying information before acting on it.
-          </p>
-        </section>
 
         <section className="space-y-2">
           <h2 className="text-sm font-medium text-neutral-200">Acceptable use</h2>
@@ -37,8 +30,10 @@ export default function TermsPage() {
           </p>
         </section>
 
-        <p className="text-xs text-neutral-500">Last updated: {new Date().toISOString().slice(0, 10)}</p>
+        <p className="text-xs text-neutral-500">
+          Last updated: {new Date().toISOString().slice(0, 10)}
+        </p>
       </div>
-    </main>
+    </Shell>
   );
 }

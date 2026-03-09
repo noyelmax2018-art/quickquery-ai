@@ -57,10 +57,10 @@ export default function Shell({
 }) {
   return (
     <main className="min-h-screen bg-neutral-950 text-neutral-100">
-      {/* subtle background glow (animated) */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-indigo-600/20 blur-3xl animate-glow-slow" />
-        <div className="absolute -bottom-24 right-10 h-[420px] w-[420px] rounded-full bg-fuchsia-600/10 blur-3xl animate-glow-slower" />
+      {/* Stripe-ish mesh background + grain */}
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-mesh" />
+        <div className="absolute inset-0 bg-grain opacity-[0.08]" />
       </div>
 
       <div className="mx-auto max-w-5xl px-4 py-8 md:px-8 md:py-12">

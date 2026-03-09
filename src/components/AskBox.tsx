@@ -12,6 +12,7 @@ export default function AskBox() {
   const [useWeb, setUseWeb] = useState(false);
   const [answer, setAnswer] = useState<string | null>(null);
   const [citations, setCitations] = useState<AskResponse["citations"] | null>(null);
+  const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,6 +24,7 @@ export default function AskBox() {
     setError(null);
     setAnswer(null);
     setCitations(null);
+    setCopied(false);
 
     try {
       const res = await fetch("/api/ask", {
@@ -72,12 +74,12 @@ export default function AskBox() {
 
         <div className="flex flex-wrap items-center gap-3">
           <button
-            className="rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-black shadow-sm transition hover:opacity-90 disabled:opacity-50"
+            className="rounded-xl bg-gradient-to-r from-indigo-400 to-fuchsia-400 px-5 py-2.5 text-sm font-semibold text-black shadow-[0_8px_30px_rgba(99,102,241,0.25)] transition hover:opacity-95 disabled:opacity-50"
             onClick={() => void onAsk()}
             disabled={!canAsk}
           >
             {loading ? "Thinking…" : "Get answer"}
-            <span className="ml-2 text-xs text-neutral-700">(Enter)</span>
+            <span className="ml-2 text-xs text-black/60">(Enter)</span>
           </button>
 
           <label className="flex items-center gap-2 text-xs text-neutral-300">
@@ -118,10 +120,39 @@ export default function AskBox() {
         </div>
       ) : null}
 
-      {answer ? (
+      {answer || loading ? (
         <div className="space-y-3">
-          <div className="rounded-md border border-neutral-800 bg-neutral-900 p-4 text-sm leading-6 text-neutral-100 shadow-sm whitespace-pre-wrap">
-            {answer}
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm leading-6 text-neutral-100 shadow-sm">
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div className="text-xs font-medium text-neutral-300">Answer</div>
+              <button
+                type="button"
+                onClick={async () => {
+                  if (!answer) return;
+                  try {
+                    await navigator.clipboard.writeText(answer);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 1200);
+                  } catch {
+                    // ignore
+                  }
+                }}
+                className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-neutral-200 hover:bg-white/10 disabled:opacity-40"
+                disabled={!answer}
+              >
+                {copied ? "Copied" : "Copy"}
+              </button>
+            </div>
+
+            {loading ? (
+              <div className="space-y-2">
+                <div className="h-4 w-5/6 animate-pulse rounded bg-white/10" />
+                <div className="h-4 w-4/6 animate-pulse rounded bg-white/10" />
+                <div className="h-4 w-3/6 animate-pulse rounded bg-white/10" />
+              </div>
+            ) : (
+              <div className="whitespace-pre-wrap">{answer}</div>
+            )}
           </div>
 
           {citations?.length ? (

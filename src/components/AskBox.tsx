@@ -47,13 +47,18 @@ export default function AskBox() {
     }
   }
 
+  const quickPrompts = [
+    "Best hosting for a beginner website?",
+    "How to buy a domain name safely?",
+    "WordPress vs website builder — which should I choose?",
+  ];
+
   return (
-    <section className="space-y-4">
-      <div className="space-y-2">
-        <label className="text-sm font-medium">Your question</label>
+    <section className="space-y-5">
+      <div className="space-y-3">
         <textarea
-          className="w-full rounded-md border border-neutral-800 bg-neutral-900 p-3 text-sm text-neutral-100 shadow-sm placeholder:text-neutral-500 focus:border-neutral-500 focus:outline-none"
-          rows={3}
+          className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-neutral-100 shadow-sm placeholder:text-neutral-400 focus:border-white/20 focus:outline-none"
+          rows={4}
           value={q}
           onChange={(e) => setQ(e.target.value)}
           onKeyDown={(e) => {
@@ -62,35 +67,48 @@ export default function AskBox() {
               void onAsk();
             }
           }}
-          placeholder='e.g. "What is Cloudflare Workers AI?"'
+          placeholder="Ask anything…"
         />
 
         <div className="flex flex-wrap items-center gap-3">
           <button
-            className="rounded-md bg-white px-4 py-2 text-sm font-medium text-black disabled:opacity-50"
+            className="rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-black shadow-sm transition hover:opacity-90 disabled:opacity-50"
             onClick={() => void onAsk()}
             disabled={!canAsk}
           >
-            {loading ? "Thinking…" : "Ask"}
+            {loading ? "Thinking…" : "Get answer"}
             <span className="ml-2 text-xs text-neutral-700">(Enter)</span>
           </button>
 
-          <label className="flex items-center gap-2 text-xs text-neutral-400">
+          <label className="flex items-center gap-2 text-xs text-neutral-300">
             <input
               type="checkbox"
-              className="accent-white"
+              className="h-4 w-4 rounded border-white/20 bg-white/5 accent-white"
               checked={useWeb}
               onChange={(e) => setUseWeb(e.target.checked)}
             />
-            Use web citations (optional)
+            Add citations
           </label>
 
-          <span className="text-xs text-neutral-500">Powered by Cloudflare Workers AI</span>
+          <span className="text-xs text-neutral-400">Powered by Cloudflare Workers AI</span>
         </div>
 
-        <div className="text-xs text-neutral-500">
-          Tip: Press <span className="font-medium text-neutral-200">Enter</span> to ask,
-          <span className="font-medium text-neutral-200"> Shift+Enter</span> for a new line.
+        <div className="flex flex-wrap gap-2">
+          {quickPrompts.map((p) => (
+            <button
+              key={p}
+              type="button"
+              className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-neutral-200 transition hover:bg-white/10"
+              onClick={() => setQ(p)}
+            >
+              {p}
+            </button>
+          ))}
+        </div>
+
+        <div className="text-xs text-neutral-400">
+          Tip: <span className="font-medium text-neutral-200">Enter</span> to submit, 
+          <span className="font-medium text-neutral-200">Shift+Enter</span> for a new line.
         </div>
       </div>
 

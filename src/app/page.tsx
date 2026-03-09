@@ -1,6 +1,7 @@
 import AskBox from "@/components/AskBox";
 import Monetization from "@/components/Monetization";
 import Shell from "@/components/Shell";
+import SocialProof from "@/components/SocialProof";
 
 export default function Home() {
   return (
@@ -34,6 +35,8 @@ export default function Home() {
             <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">Private</span>
           </div>
         </section>
+
+        <SocialProof />
 
         <Monetization />
       </div>

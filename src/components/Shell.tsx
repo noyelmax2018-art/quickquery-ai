@@ -77,6 +77,8 @@ export default function Shell({
 
           <nav className="flex flex-wrap gap-1">
             <NavLink href="/">Ask</NavLink>
+            <NavLink href="/faq">FAQ</NavLink>
+            <NavLink href="/changelog">Changelog</NavLink>
             <NavLink href="/guides/how-to-start-a-website">Guides</NavLink>
             <NavLink href="/contact">Contact</NavLink>
             <NavLink href="/privacy">Privacy</NavLink>

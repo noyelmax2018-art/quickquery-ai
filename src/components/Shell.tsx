@@ -68,7 +68,7 @@ export default function Shell({
           <div className="space-y-1">
             <Link href="/" className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight">
               <LogoMark />
-              <span className="bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-white/80 to-white/60 bg-clip-text text-transparent">
                 QuickQuery AI
               </span>
             </Link>

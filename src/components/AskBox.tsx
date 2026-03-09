@@ -7,6 +7,27 @@ type AskResponse = {
   citations?: { title: string; url: string }[];
 };
 
+function formatAnswer(answer: string) {
+  const rawLines = answer
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean);
+
+  const first = rawLines[0] ?? "";
+
+  const bullets = rawLines
+    .slice(1)
+    .filter((l) => /^[-•*]\s+/.test(l))
+    .map((l) => l.replace(/^[-•*]\s+/, ""));
+
+  const restText = rawLines
+    .slice(1)
+    .filter((l) => !/^[-•*]\s+/.test(l))
+    .join("\n");
+
+  return { first, bullets, restText };
+}
+
 export default function AskBox() {
   const [q, setQ] = useState("");
   const [useWeb, setUseWeb] = useState(false);
@@ -125,23 +146,50 @@ export default function AskBox() {
           <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm leading-6 text-neutral-100 shadow-sm">
             <div className="mb-3 flex items-center justify-between gap-3">
               <div className="text-xs font-medium text-neutral-300">Answer</div>
-              <button
-                type="button"
-                onClick={async () => {
-                  if (!answer) return;
-                  try {
-                    await navigator.clipboard.writeText(answer);
-                    setCopied(true);
-                    setTimeout(() => setCopied(false), 1200);
-                  } catch {
-                    // ignore
-                  }
-                }}
-                className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-neutral-200 hover:bg-white/10 disabled:opacity-40"
-                disabled={!answer}
-              >
-                {copied ? "Copied" : "Copy"}
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={async () => {
+                    if (!answer) return;
+                    try {
+                      await navigator.clipboard.writeText(answer);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 1200);
+                    } catch {
+                      // ignore
+                    }
+                  }}
+                  className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-neutral-200 hover:bg-white/10 disabled:opacity-40"
+                  disabled={!answer}
+                >
+                  {copied ? "Copied" : "Copy"}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={async () => {
+                    const url = window.location.href;
+                    try {
+                      if (navigator.share) {
+                        await navigator.share({
+                          title: "QuickQuery AI",
+                          text: "Quick answer:",
+                          url,
+                        });
+                      } else {
+                        await navigator.clipboard.writeText(url);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 1200);
+                      }
+                    } catch {
+                      // ignore
+                    }
+                  }}
+                  className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-neutral-200 hover:bg-white/10"
+                >
+                  Share
+                </button>
+              </div>
             </div>
 
             {loading ? (
@@ -150,9 +198,26 @@ export default function AskBox() {
                 <div className="h-4 w-4/6 animate-pulse rounded bg-white/10" />
                 <div className="h-4 w-3/6 animate-pulse rounded bg-white/10" />
               </div>
-            ) : (
-              <div className="whitespace-pre-wrap">{answer}</div>
-            )}
+            ) : answer ? (
+              (() => {
+                const { first, bullets, restText } = formatAnswer(answer);
+                return (
+                  <div className="space-y-3">
+                    {first ? <div className="text-base font-medium">{first}</div> : null}
+                    {bullets.length ? (
+                      <ul className="list-disc space-y-1 pl-5 text-sm text-neutral-200/90">
+                        {bullets.map((b) => (
+                          <li key={b}>{b}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                    {restText ? (
+                      <div className="whitespace-pre-wrap text-sm text-neutral-200/90">{restText}</div>
+                    ) : null}
+                  </div>
+                );
+              })()
+            ) : null}
           </div>
 
           {citations?.length ? (

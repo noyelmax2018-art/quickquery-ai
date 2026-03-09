@@ -41,10 +41,18 @@ export async function POST(req: Request) {
 
   const body = (await req.json().catch(() => null)) as
     | null
-    | { q?: string; useWeb?: boolean };
+    | {
+        q?: string;
+        useWeb?: boolean;
+        mode?: "short" | "detailed";
+        history?: { role: "user" | "assistant"; content: string }[];
+      };
 
   const q = body?.q?.toString().trim() ?? "";
   const useWeb = Boolean(body?.useWeb);
+  const mode = body?.mode ?? "short";
+  const history = Array.isArray(body?.history) ? body?.history.slice(0, 10) : [];
+
 
   if (q.length < 3) {
     return Response.json({ error: "Question too short" }, { status: 400 });
@@ -76,13 +84,24 @@ export async function POST(req: Request) {
     citations = await braveSearch({ q, apiKey: braveKey });
   }
 
+  const modeRules =
+    mode === "detailed"
+      ? [
+          "Answer in a structured way.",
+          "- Start with a 1-sentence summary.",
+          "- Then add 5-8 bullets.",
+          "- Keep it practical.",
+        ]
+      : [
+          "Answer SHORT by default.",
+          "- Start with the direct answer in 1 sentence.",
+          "- Then (optional) add up to 3 short bullets if needed.",
+          "- No long explanations unless asked.",
+        ];
+
   const system = [
     "You are QuickQuery AI.",
-    "Answer SHORT by default.",
-    "Rules:",
-    "- Start with the direct answer in 1 sentence.",
-    "- Then (optional) add up to 3 short bullets if needed.",
-    "- No long explanations unless asked.",
+    ...modeRules,
     citations.length
       ? "- When using sources, include citations like [1] [2] matching the provided source list."
       : "- If you don't have sources, do not invent citations.",
@@ -95,11 +114,18 @@ export async function POST(req: Request) {
         .join("\n")
     : "";
 
-  const prompt = `${system}\n\nQuestion: ${q}${sourcesBlock}`;
+  const historyBlock = history.length
+    ? "\n\nConversation so far:\n" +
+      history
+        .map((m) => `${m.role.toUpperCase()}: ${m.content}`)
+        .join("\n")
+    : "";
+
+  const prompt = `${system}${historyBlock}\n\nQuestion: ${q}${sourcesBlock}`;
 
   const result = await ai.run("@cf/meta/llama-3.1-8b-instruct", {
     prompt,
-    max_tokens: citations.length ? 220 : 160,
+    max_tokens: mode === "detailed" ? 520 : citations.length ? 220 : 160,
   });
 
   let text: string;

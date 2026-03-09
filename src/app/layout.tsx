@@ -14,13 +14,37 @@ const geistMono = Geist_Mono({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
+const resolvedSiteUrl = (siteUrl ?? "https://quickquery-ai.pages.dev").replace(/\/$/, "");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(resolvedSiteUrl),
   title: {
     default: "QuickQuery AI",
     template: "%s · QuickQuery AI",
   },
-  description: "Fast, concise AI answers with optional citations.",
-  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
+  description: "Premium, fast, concise AI answers — with optional citations.",
+  applicationName: "QuickQuery AI",
+  openGraph: {
+    type: "website",
+    url: resolvedSiteUrl,
+    title: "QuickQuery AI",
+    description: "Premium, fast, concise AI answers — with optional citations.",
+    siteName: "QuickQuery AI",
+    images: [
+      {
+        url: "/og.svg",
+        width: 1200,
+        height: 630,
+        alt: "QuickQuery AI",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "QuickQuery AI",
+    description: "Premium, fast, concise AI answers — with optional citations.",
+    images: ["/og.svg"],
+  },
 };
 
 export default function RootLayout({

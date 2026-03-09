@@ -3,7 +3,7 @@ import Link from "next/link";
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <Link
-      className="rounded-md px-2 py-1 text-sm text-neutral-300 transition hover:bg-white/5 hover:text-white"
+      className="rounded-md px-2 py-1 text-sm text-neutral-300 transition hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40"
       href={href}
     >
       {children}
@@ -37,8 +37,8 @@ function LogoMark() {
         />
         <path
           d="M12 8.25v7.5"
-          stroke="rgba(99,102,241,0.95)"
-          strokeWidth="1.5"
+          stroke="rgba(34,211,238,0.95)"
+          strokeWidth="1.6"
           strokeLinecap="round"
         />
       </svg>
@@ -57,19 +57,26 @@ export default function Shell({
 }) {
   return (
     <main className="min-h-screen bg-neutral-950 text-neutral-100">
-      {/* Stripe-ish mesh background + grain */}
+      {/* Mesh background + vignette + grain */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute inset-0 bg-mesh" />
-        <div className="absolute inset-0 bg-grain opacity-[0.08]" />
+        <div className="absolute inset-0 bg-vignette" />
+        <div className="absolute inset-0 bg-grain opacity-[0.075]" />
       </div>
 
       <div className="mx-auto max-w-5xl px-4 py-8 md:px-8 md:py-12">
         <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="space-y-1">
-            <Link href="/" className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40"
+            >
               <LogoMark />
               <span className="bg-gradient-to-r from-white via-white/80 to-white/60 bg-clip-text text-transparent">
                 QuickQuery AI
+              </span>
+              <span className="ml-1 hidden rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-neutral-300 md:inline">
+                beta
               </span>
             </Link>
             {subtitle ? <div className="text-sm text-neutral-400">{subtitle}</div> : null}
@@ -94,8 +101,12 @@ export default function Shell({
 
         <div className="mt-8">{children}</div>
 
-        <footer className="mt-12 border-t border-neutral-900/80 pt-6 text-xs text-neutral-500">
-          © {new Date().getFullYear()} QuickQuery AI — owned by noyelmax
+        <footer className="mt-12 border-t border-white/10 pt-6 text-xs text-neutral-500">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <span>© {new Date().getFullYear()} QuickQuery AI — owned by noyelmax</span>
+            <span className="text-neutral-600">·</span>
+            <span>AI answers can be wrong. Verify important info.</span>
+          </div>
         </footer>
       </div>
     </main>

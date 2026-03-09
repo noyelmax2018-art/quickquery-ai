@@ -30,7 +30,7 @@ export default function AffiliateModule({ links = DEFAULT_LINKS }: { links?: Aff
       <p className="text-xs text-neutral-500">{disclosure}</p>
       <ul className="grid gap-2 md:grid-cols-2">
         {links.map((l) => (
-          <li key={l.href} className="rounded-md border border-neutral-800 bg-neutral-900 p-3">
+          <li key={l.href} className="rounded-2xl p-3 backdrop-blur qq-panel qq-panel-hover">
             <a
               className="text-sm font-medium text-neutral-100 underline underline-offset-4"
               href={l.href}
@@ -39,9 +39,7 @@ export default function AffiliateModule({ links = DEFAULT_LINKS }: { links?: Aff
             >
               {l.label}
             </a>
-            {l.description ? (
-              <div className="mt-1 text-xs text-neutral-400">{l.description}</div>
-            ) : null}
+            {l.description ? <div className="mt-1 text-xs text-neutral-400">{l.description}</div> : null}
           </li>
         ))}
       </ul>

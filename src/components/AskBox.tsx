@@ -339,7 +339,7 @@ export default function AskBox() {
     <section className="space-y-5">
       <div className="space-y-3">
         <textarea
-          className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-neutral-100 shadow-sm placeholder:text-neutral-400 focus:border-white/20 focus:outline-none"
+          className="w-full resize-none rounded-2xl p-4 text-sm text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/30 qq-panel"
           rows={4}
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -354,7 +354,7 @@ export default function AskBox() {
 
         <div className="flex flex-wrap items-center gap-3">
           <button
-            className="rounded-xl bg-gradient-to-r from-indigo-400 to-fuchsia-400 px-5 py-2.5 text-sm font-semibold text-black shadow-[0_8px_30px_rgba(99,102,241,0.25)] transition hover:opacity-95 disabled:opacity-50"
+            className="rounded-xl bg-gradient-to-r from-cyan-300 via-violet-300 to-fuchsia-300 px-5 py-2.5 text-sm font-semibold text-black shadow-[0_10px_40px_rgba(34,211,238,0.12)] transition hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40 disabled:opacity-50"
             onClick={() => void onAsk({ appendToHistory: true })}
             disabled={!canAsk}
           >
@@ -362,7 +362,7 @@ export default function AskBox() {
             <span className="ml-2 text-xs text-black/60">(Enter)</span>
           </button>
 
-          <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 p-1 text-xs">
+          <div className="flex items-center gap-2 rounded-xl p-1 text-xs qq-panel">
             <button
               type="button"
               className={`rounded-lg px-3 py-1 transition ${
@@ -397,7 +397,7 @@ export default function AskBox() {
 
           <button
             type="button"
-            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-neutral-200 transition hover:bg-white/10 disabled:opacity-40"
+            className="rounded-xl px-3 py-2 text-xs text-neutral-200 transition disabled:opacity-40 qq-panel qq-panel-hover"
             onClick={() => void onAsk({ appendToHistory: true })}
             disabled={!canAsk || loading}
             title="Regenerate"
@@ -407,7 +407,7 @@ export default function AskBox() {
 
           <button
             type="button"
-            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-neutral-200 transition hover:bg-white/10"
+            className="rounded-xl px-3 py-2 text-xs text-neutral-200 transition qq-panel qq-panel-hover"
             onClick={() => {
               setQ("");
               setFollowUp("");
@@ -430,7 +430,7 @@ export default function AskBox() {
             <button
               key={p}
               type="button"
-              className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-neutral-200 transition hover:bg-white/10"
+              className="rounded-full px-3 py-1 text-xs text-neutral-200 transition qq-panel qq-panel-hover"
               onClick={() => {
                 setQ(p);
                 void onAsk({ qOverride: p, appendToHistory: true });
@@ -453,14 +453,11 @@ export default function AskBox() {
 
       {answer || loading ? (
         <div className="space-y-4">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm leading-6 text-neutral-100 shadow-sm">
+          <div className="rounded-2xl p-4 text-sm leading-6 text-neutral-100 backdrop-blur qq-panel qq-neon-ring">
             <div className="mb-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between md:gap-3">
               <div className="flex items-center gap-2">
                 {loading ? (
-                  <span
-                    aria-hidden
-                    className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/20 border-t-white/70"
-                  />
+                  <span aria-hidden className="qq-spinner" />
                 ) : null}
                 <div className="text-xs font-medium text-neutral-300">Answer</div>
                 {loading ? <div className="text-xs text-neutral-500">This may take a few seconds…</div> : null}
@@ -479,7 +476,7 @@ export default function AskBox() {
                       // ignore
                     }
                   }}
-                  className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-neutral-200 hover:bg-white/10 disabled:opacity-40"
+                  className="rounded-lg px-2 py-1 text-xs text-neutral-200 disabled:opacity-40 qq-panel qq-panel-hover"
                   disabled={!answer}
                 >
                   {copied ? "Copied" : "Copy"}
@@ -505,7 +502,7 @@ export default function AskBox() {
                       // ignore
                     }
                   }}
-                  className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-neutral-200 hover:bg-white/10"
+                  className="rounded-lg px-2 py-1 text-xs text-neutral-200 qq-panel qq-panel-hover"
                 >
                   Share
                 </button>
@@ -520,7 +517,7 @@ export default function AskBox() {
                       // ignore
                     }
                   }}
-                  className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-neutral-200 hover:bg-white/10 disabled:opacity-40"
+                  className="rounded-lg px-2 py-1 text-xs text-neutral-200 disabled:opacity-40 qq-panel qq-panel-hover"
                   disabled={!answer}
                   title="Generate a branded PNG"
                 >
@@ -568,14 +565,14 @@ export default function AskBox() {
                     w.document.close();
                     w.focus();
                   }}
-                  className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-neutral-200 hover:bg-white/10 disabled:opacity-40"
+                  className="rounded-lg px-2 py-1 text-xs text-neutral-200 disabled:opacity-40 qq-panel qq-panel-hover"
                   disabled={!answer}
                   title="Print or save as PDF"
                 >
                   Export / Print
                 </button>
 
-                <div className="ml-1 flex items-center gap-1 rounded-lg border border-white/10 bg-white/5 p-1">
+                <div className="ml-1 flex items-center gap-1 rounded-lg p-1 qq-panel">
                   <button
                     type="button"
                     className={`rounded-md px-2 py-1 text-xs transition ${
@@ -614,9 +611,9 @@ export default function AskBox() {
 
             {loading ? (
               <div className="space-y-2">
-                <div className="h-4 w-5/6 animate-pulse rounded bg-white/10" />
-                <div className="h-4 w-4/6 animate-pulse rounded bg-white/10" />
-                <div className="h-4 w-3/6 animate-pulse rounded bg-white/10" />
+                <div className="qq-shimmer h-4 w-5/6 rounded bg-white/10" />
+                <div className="qq-shimmer h-4 w-4/6 rounded bg-white/10" />
+                <div className="qq-shimmer h-4 w-3/6 rounded bg-white/10" />
               </div>
             ) : answer ? (
               (() => {
@@ -641,11 +638,11 @@ export default function AskBox() {
           </div>
 
           {history.length ? (
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="rounded-2xl p-4 backdrop-blur qq-panel">
               <div className="text-xs font-medium text-neutral-200">Follow-up</div>
               <div className="mt-2 flex flex-col gap-2 md:flex-row">
                 <input
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-500 focus:border-white/20 focus:outline-none"
+                  className="w-full rounded-xl px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/30 qq-panel"
                   value={followUp}
                   onChange={(e) => setFollowUp(e.target.value)}
                   placeholder="Ask a follow-up…"
@@ -659,7 +656,7 @@ export default function AskBox() {
                 />
                 <button
                   type="button"
-                  className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-100 transition hover:bg-white/10 disabled:opacity-40"
+                  className="rounded-xl px-4 py-2 text-sm text-neutral-100 transition disabled:opacity-40 qq-panel qq-panel-hover"
                   disabled={!canFollowUp}
                   onClick={() => {
                     void onAsk({ qOverride: followUp, appendToHistory: true });
@@ -673,7 +670,7 @@ export default function AskBox() {
           ) : null}
 
           {citations?.length ? (
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="rounded-2xl p-4 backdrop-blur qq-panel">
               <div className="text-xs font-medium text-neutral-200">Sources</div>
               <ol className="mt-2 list-decimal space-y-1 pl-4 text-xs text-neutral-400">
                 {citations.map((c) => (
